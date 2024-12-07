@@ -29,6 +29,10 @@ class Car
         $this->dateProduced = $dateProduced;
     }
 
+    public function __destruct()
+    {
+        echo "\n Hello";
+    }
     public function setCarcase(string $carcase)
     {
         return $this->carcase = $carcase;
