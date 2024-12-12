@@ -43,8 +43,8 @@
         <ul>
             <li><a href="/">Главная страница</a></li>
             <li><a href="/company">Про нас</a></li>
-            <li><a href="{{ route('chingiz') }}">Логин</a></li>
-            <li><a href="{{ route('alik') }}">Регистрация</a></li>
+            <!-- This is a comment <li><a href="">Логин</a></li>
+            <li><a href="">Регистрация</a></li>-->
         </ul>
     </nav>
 </header>
