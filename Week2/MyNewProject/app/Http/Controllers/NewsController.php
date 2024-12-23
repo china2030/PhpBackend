@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NewsCreateRequest;
 use App\Models\News;
 use Illuminate\Http\Request;
 
@@ -13,21 +14,18 @@ class NewsController extends Controller
         return view('homepage', compact(['news']));
     }
 
-    public function create(Request $request)
+    public function create(NewsCreateRequest $request)
     {
-        $title=$request->title;
-        $author_name=$request->author_name;
-        $image_url=$request->image_url;
-        $text=$request->text;
+        $data=$request->validated();
 
         $news = new News();
-        $news->title=$title;
-        $news->author_name=$author_name;
-        $news->image_url=$image_url;
-        $news->text=$text;
+        $news->title= $data['title'];
+        $news->author_name= $data['author_name'];
+        $news->image_url= $data['image_url'];
+        $news->text= $data['text'];
         $news->save();
 
-        return redirect(route('homepage'));
+        return redirect(route('homepage'))->with('success','News Created Successfully');
     }
 
     public function detail($id)

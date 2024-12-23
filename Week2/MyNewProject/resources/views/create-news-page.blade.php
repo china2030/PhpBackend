@@ -4,6 +4,16 @@
 
 @section('content')
     <h1>Publish News</h1>
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="form-container">
         <form action="{{route ('create-news-post')}}" method ="POST">
             @csrf
