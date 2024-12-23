@@ -11,6 +11,9 @@
         <input type="submit" value="Submit">
 
         <img src="https://www.w3schools.com/images/lamp.jpg" alt="Lamp" width="32" height="32">
-
+        <i class="bi bi-pin"></i>
+        <button type="button" class="btn btn-danger">
+                Кнопка
+        </button>
     </form>@endsection
 

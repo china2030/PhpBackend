@@ -11,7 +11,8 @@
             <th>Каласы</th>
             <th>Жасы</th>
         </tr>
-        @foreach($results as $person)
+        //@foreach($results as $person)
+            @foreach($request as $news)
             <tr>
                 <td>{{$person->FirstName}}</td>
                 <td>{{$person->City}}</td>

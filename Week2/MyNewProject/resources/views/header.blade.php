@@ -41,8 +41,9 @@
 <header>
     <nav>
         <ul>
-            <li><a href="/">Главная страница</a></li>
-            <li><a href="/company">Про нас</a></li>
+            <li><a href="/">News page</a></li>
+            <li><a href={{route('about')}}>About us</a></li>
+            <li><a href={{route('create-news')}}>Create</a></li>
             <!-- This is a comment <li><a href="">Логин</a></li>
             <li><a href="">Регистрация</a></li>-->
         </ul>
