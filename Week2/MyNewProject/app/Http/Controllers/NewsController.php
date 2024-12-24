@@ -4,13 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NewsCreateRequest;
 use App\Models\News;
+use App\Services\NewsService;
 use Illuminate\Http\Request;
+use App\Services\Interfaces\NewsServiceInterface;
 
 class NewsController extends Controller
 {
+    public function __construct(private NewsService $newsService)
+    {
+
+    }
     public function index()
     {
-        $news=News::all();
+        $news=$this->newsService->getAll();
+
         return view('homepage', compact(['news']));
     }
 
@@ -18,12 +25,8 @@ class NewsController extends Controller
     {
         $data=$request->validated();
 
-        $news = new News();
-        $news->title= $data['title'];
-        $news->author_name= $data['author_name'];
-        $news->image_url= $data['image_url'];
-        $news->text= $data['text'];
-        $news->save();
+        $this->newsService->create($data);
+
 
         return redirect(route('homepage'))->with('success','News Created Successfully');
     }
@@ -31,34 +34,26 @@ class NewsController extends Controller
     public function detail($id)
     {
     //dd($id);
-      $news=News::find($id);
+      $news=$this->newsService->getById($id);
       return view('detailed-news', compact(['news']));
     }
 
     public function  getUpdatePage(int $id)
     {
-        $news=News::find($id);
+        $news=$this->newsService->getById($id);
         return view('update-news', compact(['news']));
     }
 
-    public function update(Request $request, $id)
+    public function update(int $id,Request $request )
     {
-        $news=News::find($id);
-
         //dd($news);
-        $news->title = $request->title;
-        $news->author_name = $request->author_name;
-        $news->image_url = $request->image_url;
-        $news->text = $request->text;
-
-        $news->save();
-
+        $news=$this->newsService->update($id,$request);
         return redirect(route('one-news', $news->id));
     }
 
     public function delete(int $id)
     {
-        $deleted = News::destroy($id);
+        $deleted= $this->newsService->delete($id);
 
         if($deleted){
             return redirect(route('homepage'));
